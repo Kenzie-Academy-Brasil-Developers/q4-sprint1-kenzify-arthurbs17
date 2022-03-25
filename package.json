@@ -10,14 +10,18 @@
     "dev": "tsnd --files --respawn --rs --ignore-watch node_modules src/server.ts --clear --watch ./**"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.0",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
     "@types/express-list-endpoints": "^6.0.0",
     "@types/node": "^17.0.23",
+    "@types/yup": "^0.29.13",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "eslint": "^8.11.0",
