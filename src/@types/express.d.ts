@@ -4,5 +4,7 @@ declare module 'express-serve-static-core' {
   interface Request {
     user?: User;
     validate: any;
+    validateSong: any;
+    artist: any;
   }
 }

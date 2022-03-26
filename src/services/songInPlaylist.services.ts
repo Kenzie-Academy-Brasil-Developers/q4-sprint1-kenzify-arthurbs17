@@ -1,27 +1,30 @@
 import { User } from '../models';
 import { Request } from 'express';
 import { createSong } from './';
+import { USERS_DB } from '../configs';
 
 const songInPlaylist = async (req: Request) => {
   if (!req.user) {
     return { message: 'user not found' };
   }
 
-  const user: User = req.user;
-  const [artist] = Object.keys(req.validate);
-  const newSong = await createSong(req.validate[artist]);
+  const artist = req.artist;
+  const newSong = await createSong(req.validateSong);
 
-  if (user.playlist) {
-    const playlist = user.playlist[artist];
-
-    if (!user.playlist[artist]) {
-      user.playlist = { ...user.playlist, ...{ [artist]: [newSong] } };
+  if (req.user.playlist) {
+    if (!req.user.playlist[artist]) {
+      req.user.playlist = { ...req.user.playlist, [artist]: [newSong] };
+    } else {
+      req.user.playlist[artist].push(newSong);
     }
 
-    playlist.push(newSong);
+    const response = {
+      uuid: req.user.uuid,
+      username: req.user.username,
+      playlist: req.user.playlist,
+    };
 
-    const { password, ...response } = user;
-
+    console.log(USERS_DB);
     return response;
   }
 };

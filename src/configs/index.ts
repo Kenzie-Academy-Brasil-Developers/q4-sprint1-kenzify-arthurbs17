@@ -16,7 +16,7 @@ type Users = {
   username: string;
   uuid: string;
   password: string;
-  playlist: object;
+  playlist: any;
 };
 
 const USERS_DB: Array<Users> = [];

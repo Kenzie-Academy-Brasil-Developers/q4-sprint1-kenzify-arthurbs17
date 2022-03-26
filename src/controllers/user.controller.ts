@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { USERS_DB } from '../configs';
 import { User } from '../models';
-import { createUser, loginUser } from '../services';
+import { createUser, loginUser, songInPlaylist } from '../services';
 import { StatusCodes } from 'http-status-codes';
 
 export const createUserController = async (
@@ -30,4 +30,9 @@ export const loginUserController = async (
   }
 
   return res.status(StatusCodes.OK).json(userDB);
+};
+
+export const addSongInPlaylist = async (req: Request, res: Response) => {
+  const response = await songInPlaylist(req);
+  return res.status(StatusCodes.OK).json(response);
 };
