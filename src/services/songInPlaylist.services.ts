@@ -7,9 +7,9 @@ const songInPlaylist = async (req: Request) => {
     return { message: 'user not found' };
   }
 
-  const user = req.user;
-  const [artist] = Object.keys(req.body);
-  const newSong = await createSong(req.body[artist]);
+  const user: User = req.user;
+  const [artist] = Object.keys(req.validate);
+  const newSong = await createSong(req.validate[artist]);
 
   if (user.playlist) {
     const playlist = user.playlist[artist];

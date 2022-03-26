@@ -14,7 +14,7 @@ const config: DotEnvConfigs = {
 
 type Users = {
   username: string;
-  id: string;
+  uuid: string;
   password: string;
   playlist: object;
 };

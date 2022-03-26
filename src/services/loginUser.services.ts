@@ -2,10 +2,9 @@ import { Request } from 'express';
 import JWT from 'jsonwebtoken';
 import { config, USERS_DB } from '../configs';
 import bcrypt from 'bcryptjs';
+import { User } from '../models';
 
-const loginUser = async (req: Request) => {
-  const { username, password } = req.body;
-
+const loginUser = async ({ username, password }: User) => {
   const user = USERS_DB.find((userDB) => userDB.username === username);
 
   if (user) {
