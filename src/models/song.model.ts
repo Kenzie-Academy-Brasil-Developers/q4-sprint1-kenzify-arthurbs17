@@ -1,9 +1,9 @@
-type Playlist = {
+type Song = {
   title: string;
-  duration: number;
+  duration: string;
   releasedDate: string;
   listenedByMe: number;
   genres: Array<string>;
 };
 
-export default Playlist;
+export default Song;

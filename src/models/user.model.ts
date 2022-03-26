@@ -1,10 +1,10 @@
-import { Playlist } from './index';
+import { Song } from './index';
 
 type User = {
-  id: string;
+  uuid: string;
   username: string;
   password: string;
-  playlist: Array<Playlist>;
+  playlist: { [key: string]: Array<Song> };
 };
 
 export default User;

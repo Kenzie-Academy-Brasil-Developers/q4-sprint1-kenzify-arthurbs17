@@ -1,4 +1,4 @@
-import playlistShape from './playlistShape';
+import songShape from './songShape';
 import userShape from './userShape';
 
-export { playlistShape, userShape };
+export { songShape, userShape };

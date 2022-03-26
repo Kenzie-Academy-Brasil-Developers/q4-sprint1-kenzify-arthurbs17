@@ -1,4 +1,4 @@
-import Playlist from './playslist.model';
+import Song from './song.model';
 import User from './user.model';
 
-export { Playlist, User };
+export { Song, User };
