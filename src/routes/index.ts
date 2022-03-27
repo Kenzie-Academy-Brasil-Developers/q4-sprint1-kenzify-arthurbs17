@@ -10,6 +10,7 @@ import {
   createUserController,
   loginUserController,
   addSongInPlaylist,
+  deleteSongForPlaylistController,
 } from '../controllers/user.controller';
 
 const router = Router();
@@ -30,6 +31,12 @@ router.put(
   authenticateToken,
   validateSongShape,
   addSongInPlaylist
+);
+
+router.delete(
+  '/users/playlist',
+  authenticateToken,
+  deleteSongForPlaylistController
 );
 
 export default router;

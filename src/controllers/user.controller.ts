@@ -6,6 +6,7 @@ import {
   loginUser,
   songInPlaylist,
   addCountListenSong,
+  deleteSongForPlaylist,
 } from '../services';
 import { StatusCodes } from 'http-status-codes';
 
@@ -45,8 +46,21 @@ export const addSongInPlaylist = async (req: Request, res: Response) => {
     return res.status(StatusCodes.OK).json(response);
   }
 
-  const songInDB = await addCountListenSong(req);
+  const songInDB = await addCountListenSong(req, res);
   if (songInDB) {
     return res.status(StatusCodes.OK).json(songInDB);
+  }
+};
+
+export const deleteSongForPlaylistController = (
+  req: Request,
+  res: Response
+) => {
+  const response: any = deleteSongForPlaylist(req, res);
+  if (response) {
+    if (response.message === 'deleted') {
+      return res.status(StatusCodes.NO_CONTENT).json({});
+    }
+    return response;
   }
 };

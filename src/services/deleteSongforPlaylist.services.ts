@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { User } from '../models';
 import { StatusCodes } from 'http-status-codes';
 
-const addCountListenSong = (req: Request, res: Response) => {
+const deleteSongForPlaylist = (req: Request, res: Response) => {
   const { artist, song } = req.query;
 
   if (!req.user) {
@@ -13,17 +13,20 @@ const addCountListenSong = (req: Request, res: Response) => {
 
   if (user.playlist) {
     const playlistInDB = user.playlist[String(artist)];
-    const songInDB = playlistInDB?.find(
+    const songInDB = playlistInDB.find(
       (songDB) => songDB.title.toLowerCase() === String(song).toLowerCase()
     );
 
     if (songInDB) {
-      songInDB.listenedByMe += 1;
-      return songInDB;
+      const indexSong = playlistInDB.indexOf(songInDB);
+      playlistInDB.splice(indexSong, 1);
+      return { message: 'deleted' };
     }
 
-    return songInDB;
+    return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({ message: 'music not found' });
   }
 };
 
-export default addCountListenSong;
+export default deleteSongForPlaylist;
