@@ -11,6 +11,7 @@ import {
   loginUserController,
   addSongInPlaylist,
   deleteSongForPlaylistController,
+  getAllUsersController,
 } from '../controllers/user.controller';
 
 const router = Router();
@@ -38,5 +39,7 @@ router.delete(
   authenticateToken,
   deleteSongForPlaylistController
 );
+
+router.get('/users', authenticateToken, getAllUsersController);
 
 export default router;
