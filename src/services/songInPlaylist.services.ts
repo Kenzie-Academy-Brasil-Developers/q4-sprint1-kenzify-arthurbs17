@@ -1,11 +1,10 @@
-import { User } from '../models';
 import { Request } from 'express';
 import { createSong } from './';
 import { USERS_DB } from '../configs';
 
 const songInPlaylist = async (req: Request) => {
   if (!req.user) {
-    return { message: 'user not found' };
+    return { message: 'wrong token' };
   }
 
   const artist = req.artist;
@@ -24,7 +23,6 @@ const songInPlaylist = async (req: Request) => {
       playlist: req.user.playlist,
     };
 
-    console.log(USERS_DB);
     return response;
   }
 };

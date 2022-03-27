@@ -1,7 +1,12 @@
 import { Request, Response } from 'express';
 import { USERS_DB } from '../configs';
 import { User } from '../models';
-import { createUser, loginUser, songInPlaylist } from '../services';
+import {
+  createUser,
+  loginUser,
+  songInPlaylist,
+  addCountListenSong,
+} from '../services';
 import { StatusCodes } from 'http-status-codes';
 
 export const createUserController = async (
@@ -33,6 +38,15 @@ export const loginUserController = async (
 };
 
 export const addSongInPlaylist = async (req: Request, res: Response) => {
-  const response = await songInPlaylist(req);
-  return res.status(StatusCodes.OK).json(response);
+  const { artist, song } = req.query;
+
+  if (!artist && !song) {
+    const response = await songInPlaylist(req);
+    return res.status(StatusCodes.OK).json(response);
+  }
+
+  const songInDB = await addCountListenSong(req);
+  if (songInDB) {
+    return res.status(StatusCodes.OK).json(songInDB);
+  }
 };
